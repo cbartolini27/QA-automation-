@@ -23,9 +23,20 @@ WebDriverWait(driver, 5).until(
 search_bar = driver.find_element(By.CLASS_NAME, "gLFyf") #This allows you to get the element you're working, this example we chose the class identifier for the search bar on google
 
 search_bar.clear() #Clear the search bar before sending keys to it. Search bar could already contain text, previous input or even cached values
-search_bar.send_keys("Moo dang" + Keys.ENTER) #This allows you to type into the element
+search_bar.send_keys("Moo Deng" + Keys.ENTER) #This allows you to type into the element
 #search_bar.submit() this can be used for websites where the Keys.ENTER doesn't work
 
+'''
+Becuase we are trying to access another element here we want to still take the same precaustions as if we did for the search bar 
+in the event that we cant find the text Moo Deng. From 33-39 this is meant to click on  the first link that matches Moo Deng.
+This does not work with multiple links, the find_element only works with the first link that matches.
+'''
+WebDriverWait(driver, 5).until(
+    EC.presence_of_element_located((By.PARTIAL_LINK_TEXT,"Moo Deng"))
+)
+
+link = driver.find_element(By.PARTIAL_LINK_TEXT,"Moo Deng")
+link.click()
 
 time.sleep(20)
 
