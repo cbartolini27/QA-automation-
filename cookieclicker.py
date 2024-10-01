@@ -11,6 +11,8 @@ driver = webdriver.Chrome(service = service)
 
 driver.get("https://orteil.dashnet.org/cookieclicker/")
 cookie_id = "bigCookie"
+product_price_prefix = "productPrice"
+upgrade_prefix = "product"
 
 #Function for getting the cookie count
 def get_cookie_count():
@@ -24,8 +26,11 @@ def get_cookie_count():
     were to just do cookie_count_text[0] it would only grab the first element
     and if we have '128' clicks for our cookie, it will only grab '1'
     '''
-    cookie_count = int(cookie_count_text.split(" ")[0])
-    return cookie_count
+    
+    cookie_count = cookie_count_text.split(" ")[0] #Parsing to grab first number before space in string
+    cleaned_cookie_count = int(cookie_count.replace(",", "")) #Replacing a semicolon
+   
+    return cleaned_cookie_count
 
 
 #Wait for the language to appear
@@ -38,23 +43,31 @@ language = driver.find_element(By.XPATH, "//*[contains(text(),'English')]")
 language.click()
 
 
-
-
-
-
-#Clicking the cookie
-while (get_cookie_count() < 100):
+#Clicking the cookie and buying upgrades
+while True:
     try:
+        time.sleep(0.3) # Resolved printing payment successful out to many times
+        number_of_cookies = get_cookie_count()
+       
         #Wait for the Cookie to appear
         WebDriverWait(driver, 5).until(
          EC.presence_of_element_located((By.ID, cookie_id))
         )
         
-        time.sleep(0.01)
         cookie = driver.find_element(By.ID, cookie_id)
         driver.execute_script("arguments[0].click();", cookie) #Used javaScript to click cookie b/c ran into selenium issues
+       
+       #Getting the price for each upgrade, 20 possible ones to get
+        for i in range(20):
+            upgrade_price = driver.find_element(By.ID, product_price_prefix + str(i)).text
+            cleaned_upgrade_price = int(upgrade_price.replace(",", "")) #gets rid of commas when getting the price
     
+            
+            if number_of_cookies >= cleaned_upgrade_price:
+               upgrade = driver.find_element(By.ID, upgrade_prefix + str(i))
+               driver.execute_script("arguments[0].click();", upgrade)
+               break
     except Exception as e:
-        print(f"Error clicking the cookie: {e}")
-
+        pass
+    
 time.sleep(120)
