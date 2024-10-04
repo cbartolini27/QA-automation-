@@ -6,10 +6,10 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC  
 import time
 
-service = Service(executable_path="chromedriver.exe")
+service = Service(executable_path = "chromedriver.exe")
 driver = webdriver.Chrome(service = service)
-
 driver.get("https://orteil.dashnet.org/cookieclicker/")
+
 cookie_id = "bigCookie"
 product_price_prefix = "productPrice"
 upgrade_prefix = "product"
@@ -69,5 +69,9 @@ while True:
                break
     except Exception as e:
         pass
+
+
+
+    
     
 time.sleep(120)

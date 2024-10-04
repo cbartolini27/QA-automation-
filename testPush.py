@@ -7,7 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC #Allow for us t
 import time
 
 service = Service(executable_path="chromedriver.exe")
-driver = webdriver.Chrome(service=service)
+driver = webdriver.Chrome(service = service)
 
 driver.get("https://www.google.com") #Opens a page or a website
 
@@ -31,12 +31,13 @@ Becuase we are trying to access another element here we want to still take the s
 in the event that we cant find the text Moo Deng. From 33-39 this is meant to click on  the first link that matches Moo Deng.
 This does not work with multiple links, the find_element only works with the first link that matches.
 '''
-WebDriverWait(driver, 5).until(
+
+link = WebDriverWait(driver, 5).until(
     EC.presence_of_element_located((By.PARTIAL_LINK_TEXT,"Moo Deng"))
 )
 
-link = driver.find_element(By.PARTIAL_LINK_TEXT,"Moo Deng")
 link.click()
+
 
 time.sleep(20)
 
