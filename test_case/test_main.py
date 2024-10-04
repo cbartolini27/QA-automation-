@@ -11,14 +11,15 @@ class PythonOrgSearch(unittest.TestCase):
     def setUp(self): 
        service = Service(executable_path="chromedriver.exe")
        self.driver = webdriver.Chrome(service=service)
-       self.driver.get("https://www.google.com/")
+       self.driver.get("https://orteil.dashnet.org/cookieclicker/")
     
     #Each test we decide to make MUST first be named 'test'
     def test_example1(self):
-        print("heheheh")
+        print("WORKED LETS GO!")
         assert True
     
     def test_example2(self):
+        print("YOU CAN DO HARD SHIT DUDE!!")
         assert True
     
     #Once all of the test cases has run .close() closes the window but webdriver continues to run. .quit() closes all windows and terminates the WebDriver session
