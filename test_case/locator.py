@@ -7,4 +7,8 @@ how we want to access them (by ID, Class, etc.) and what their value is.
 from selenium.webdriver.common.by import By
 
 class MainPageLocators(object):
-    COOKIE = (By.ID, "bigCookie")
+    GO_BUTTON = (By.ID, "submit")
+
+class SearchResultsPageLocators(object):
+    #You need to add the SearchResulstPageLocators specific to this new page. We do not mix MianPageLocators with SearchResultPageLocators
+    pass #replace with locator
