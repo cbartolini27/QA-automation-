@@ -26,6 +26,7 @@ class MainPage(BasePage):
 
 class SearchResultPage(BasePage):
     def is_results_found(self):
+        #Each new page should incorporate this if you are doing a data retreival function
         return "No results found." not in self.driver.page_source #Returns true if 'No results found.' is not on the page. If its not on the page search was successful
 
 
