@@ -7,7 +7,8 @@ how we want to access them (by ID, Class, etc.) and what their value is.
 from selenium.webdriver.common.by import By
 
 class MainPageLocators(object):
-    GO_BUTTON = (By.ID, "submit")
+    GO_BUTTON = (By.ID, 'submit')
+    SEARCH_BOX = 'q'
 
 class SearchResultsPageLocators(object):
     #You need to add the SearchResulstPageLocators specific to this new page. We do not mix MianPageLocators with SearchResultPageLocators

@@ -1,9 +1,9 @@
 import locator
 from element import BasePageElement
+from selenium.webdriver.common.by import By
 
 
-class SearchTextElement(BasePageElement):
-    locator = "q" #This is the name for the search box
+
  
 class BasePage(object):                                         
     def __init__(self, driver):
@@ -13,10 +13,9 @@ class BasePage(object):
 #inhereting BasePage
 class MainPage(BasePage):
     #Creates an instance of the SearchTextElement() class above.
-    search_text_element = SearchTextElement()
+    #Now able t
+    search_text_element = BasePageElement(By.NAME, locator.MainPageLocators.SEARCH_BOX)
     
-    
-
     def is_title_matches(self):
         return "Python" in self.driver.title
     

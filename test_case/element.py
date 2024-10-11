@@ -17,18 +17,22 @@ this is seen in python as a descripter, and python would get confused with multi
 #Setting the value of the element - descriptor class
 class BasePageElement(object):
     #Setting and getting the 'name' element. If you want ID you would maybe have to create another set of these
+    def __init__(self, by, locator):
+        self.by = by
+        self.locator = locator
+    
     def __set__(self, obj, value):
         driver = obj.driver
         WebDriverWait(driver, 100).until(
-            lambda driver: driver.find_element(By.NAME, self.locator)
+            lambda driver: driver.find_element(self.by, self.locator)
         )
-        driver.find_element(By.NAME, self.locator).clear()
-        driver.find_element(By.NAME, self.locator).send_keys(value)
+        driver.find_element(self.by, self.locator).clear()
+        driver.find_element(self.by, self.locator).send_keys(value)
 
     def __get__(self, obj, owner):
         driver = obj.driver
         WebDriverWait(driver, 100).until(
-            lambda driver: driver.find_element(By.NAME, self.locator)
+            lambda driver: driver.find_element(self.by, self.locator)
         )
-        element = driver.find_element(By.NAME, self.locator)
+        element = driver.find_element(self.by, self.locator)
         return element.get_attribute("value")
