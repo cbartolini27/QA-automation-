@@ -1,8 +1,8 @@
 import unittest
 from selenium.webdriver.chrome.service import Service
 from selenium import webdriver
-import test_case.page as page #page file we made
 import page
+import pytest
 
 class PythonOrgSearch(unittest.TestCase):
     #This is like the __init__ constructer method, use it to set up our variables to test on
@@ -17,6 +17,7 @@ class PythonOrgSearch(unittest.TestCase):
        
         if main_page.is_title_matches() == True:
             print("This worked")
+            self.driver.save_screenshot("./test_case/screenshots/test_title.png")
         self.assertTrue(main_page.is_title_matches(), "Python is not in the title!") #Different way of asserting true or not
     
     def test_search_python(self):

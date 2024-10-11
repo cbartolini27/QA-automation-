@@ -2,9 +2,6 @@ import locator
 from element import BasePageElement
 from selenium.webdriver.common.by import By
 
-
-
- 
 class BasePage(object):                                         
     def __init__(self, driver):
         #instance variable
@@ -13,7 +10,6 @@ class BasePage(object):
 #inhereting BasePage
 class MainPage(BasePage):
     #Creates an instance of the SearchTextElement() class above.
-    #Now able t
     search_text_element = BasePageElement(By.NAME, locator.MainPageLocators.SEARCH_BOX)
     
     def is_title_matches(self):
