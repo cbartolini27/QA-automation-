@@ -1,12 +1,11 @@
 import locator
 from element import BasePageElement
 
-#Not really sure how SearchTextElement inherits content from base page and how its able to pass in 
-#the value q for the 
+
 class SearchTextElement(BasePageElement):
     locator = "q" #This is the name for the search box
  
-class BasePage(object):
+class BasePage(object):                                         
     def __init__(self, driver):
         #instance variable
         self.driver = driver
@@ -15,6 +14,7 @@ class BasePage(object):
 class MainPage(BasePage):
     #Creates an instance of the SearchTextElement() class above.
     search_text_element = SearchTextElement()
+    
     
 
     def is_title_matches(self):
